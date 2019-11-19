@@ -45,6 +45,14 @@ Everything you need to set up and program a Lego ev3. https://www.ev3dev.org/ is
 - If that lets you enter, then leave that open (or active in the background) and in the GCP terminal put ssh -p 6000 robot@localhost and you should have access to your ev3 by ssh remotely. 
 - BE VERY CAREFULL NOT TO HAVE OTHER PREVIOUS CONFIGURATIONS ON THE EV3 OR GCP OTHERWISE THIS WILL NOT WORK.
 
+## KEEP REVERSE SSH OPEN IN BACKGROUND
+- use screen (sudo apt-get install screen) on ev3dev
+- type screen and hit enter
+- type the reverse SSH command
+- type ctrl + a and then d (by itself)
+- to stop it, go to ev3 and type screen -r
+- exit then exit or screen -X -S [session # you want to kill] quit
+
 
 
 
