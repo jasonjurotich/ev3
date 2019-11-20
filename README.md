@@ -29,7 +29,7 @@ Everything you need to set up and program a Lego ev3. https://www.ev3dev.org/ is
 - The IP address is private and NOT public, so you can either connect on the local network or you will have to use reverse SSH if you want to connect remotely. 
 
 ## USING GOOGLE CLOUD PLATFORM (GCP) TO SSH INTO THE EV3
-- You must have a GCP project open and active.
+- You must have a GCP project open and active. https://youtu.be/sHtEtk0dYiA
 - You must have a Compute Engine VM instance up and running. https://youtu.be/sHtEtk0dYiA
 - You must have previously entered by SSH into the ev3 on the local network 
 - To enter by ssh you put ssh robot@localIP in your terminal ("localIP" is the IP address on top of the ev3 screen like 192.168.1.1)
