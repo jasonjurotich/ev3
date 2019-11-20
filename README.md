@@ -1,4 +1,6 @@
 # ev3
+Youtube video on all of this: https://youtu.be/Op3lDRRN-Ck
+
 Everything you need to set up and program a Lego ev3. https://www.ev3dev.org/ is based on a simplified version of Debian 9 (linux) which allows you to ssh into the ev3 brick and program it. Keep in mind that the processor is VERY simple and slow. You should only install what you really need. Trying to update or upgrade everything will take a long time, so it is best to aviod it. 
 
 
