@@ -5,7 +5,7 @@
             "name": "Download and Run hello.py",
             "type": "ev3devBrowser",
             "request": "launch",
-            "program": "/home/robot/${workspaceFolderBasename}/hello.py"
+            "program": "/home/robot/${workspaceFolderBasename}/{$relativeFile}"
         }
         
     ]
