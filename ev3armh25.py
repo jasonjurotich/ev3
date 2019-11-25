@@ -1,4 +1,4 @@
-from ev3dev2.ev3 import *
+from ev3dev2 import *
 import time
 
 BASE_GEAR_RATIO = 12.0 / 36.0  
