@@ -1,4 +1,9 @@
-from ev3dev2 import *
+from ev3dev2.sound import Sound
+from ev3dev2.button import Button
+from ev3dev2.motor import MediumMotor, LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C 
+from ev3dev2.sensor.lego import TouchSensor, ColorSensor, INPUT_1, INPUT_3
+
+
 import time
 
 BASE_GEAR_RATIO = 12.0 / 36.0  
