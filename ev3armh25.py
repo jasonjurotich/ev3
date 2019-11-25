@@ -1,4 +1,3 @@
-
 from ev3dev2.ev3 import *
 import time
 
