@@ -5,39 +5,28 @@ from ev3dev2.button import Button
 from ev3dev2.motor import MediumMotor, LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
 from ev3dev2.sensor import INPUT_1, INPUT_2, INPUT_3, INPUT_4 
 from ev3dev2.sensor.lego import TouchSensor, ColorSensor
-
 import time
 
 BASE_GEAR_RATIO = 12.0 / 36.0  
 LIFT_ARM_LIMIT = 25 
 BASE_EXTRA = 0.03
 
+button = Button()
+sound = Sound()
+grab_motor = MediumMotor(OUTPUT_A)
+lift_motor = LargeMotor(OUTPUT_B)
+base_motor = LargeMotor(OUTPUT_C)
+touch = TouchSensor(INPUT_1)
+color = ColorSensor(INPUT_3)
+
 
 def init():
-  global button
-  global sound
-  global grab_motor
-  global lift_motor
-  global base_motor
-  global base_limit_sensor
-  global lift_limit_sensor
-
-  button = Button()
-  sound = Sound()
-
-  grab_motor = MediumMotor(OUTPUT_A)
-  lift_motor = LargeMotor(OUTPUT_B)
-  base_motor = LargeMotor(OUTPUT_C)
-
-  base_limit_sensor = TouchSensor(INPUT_1)
-  lift_limit_sensor = ColorSensor(INPUT_3)
-
-  lift_limit_sensor.mode = "COL-REFLECT"
+  color.mode = "COL-REFLECT"
   lift_motor.reset()
   lift_motor.stop_action = "hold"
   lift_motor.polarity = "inversed"
   lift_motor.run_forever(speed_sp=450)
-  while lift_limit_sensor.value(0) < LIFT_ARM_LIMIT:
+  while color.value(0) < LIFT_ARM_LIMIT:
     pass
   lift_motor.stop()
 
@@ -64,11 +53,6 @@ def init():
 
 
 def move(direction):
-  global grab_motor
-  global lift_motor
-  global base_motor
-  global lift_limit_sensor
-
   pos = int(base_motor.count_per_rot * (0.25 + BASE_EXTRA) / BASE_GEAR_RATIO)
   base_motor.run_to_abs_pos(position_sp=direction * pos)
   while "holding" not in base_motor.state:
@@ -84,7 +68,7 @@ def move(direction):
   grab_motor.stop()
 
   lift_motor.run_forever(speed_sp=500)
-  while lift_limit_sensor.value(0) < LIFT_ARM_LIMIT:
+  while color.value(0) < LIFT_ARM_LIMIT:
     pass
   lift_motor.stop()
 
@@ -103,7 +87,7 @@ def move(direction):
     pass
 
   lift_motor.run_forever(speed_sp=500)
-  while lift_limit_sensor.value(0) < LIFT_ARM_LIMIT:
+  while color.value(0) < LIFT_ARM_LIMIT:
     pass
   lift_motor.stop()
 
@@ -114,7 +98,7 @@ def stop():
   global lift_motor
   global base_motor
 
-  lift_limit_sensor.mode = "COL-AMBIENT"
+  color.mode = "COL-AMBIENT"
   grab_motor.reset()
   lift_motor.reset()
   base_motor.reset()
