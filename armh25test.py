@@ -36,7 +36,7 @@ def init():
   grabm.run_forever(speed_sp = 400)
   time.sleep(1)
   pos = int(grabm.count_per_rot * -0.25)
-  grabm.run_to_rel_pos(speed_sp = 600, position_sp=pos)
+  grabm.run_to_rel_pos(speed_sp = 600, position_sp = pos)
   
   basem.reset()
   basem.stop_action = "hold"
@@ -78,7 +78,7 @@ def move(direction):
     pass
 
   pos = int(liftm.count_per_rot * 280.0 / 360.0)
-  liftm.run_to_rel_pos(speed_sp = 180, position_sp=-pos)
+  liftm.run_to_rel_pos(speed_sp = 180, position_sp = -pos)
   while "holding" not in liftm.state:
     pass
 
