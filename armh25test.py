@@ -40,7 +40,7 @@ def init():
   base_motor.reset()
   base_motor.stop_action = "hold"
   base_motor.run_forever(speed_sp=450)
-  while not base_limit_sensor.value(0):
+  while not touch.value(0):
     pass
   base_motor.stop()
   pos = int(base_motor.count_per_rot * (0.25 + BASE_EXTRA) / BASE_GEAR_RATIO)
