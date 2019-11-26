@@ -26,27 +26,27 @@ def init():
   liftm.reset()
   liftm.stop_action = "hold"
   liftm.polarity = "inversed"
-  liftm.run_forever(speed_sp=450)
+  liftm.run_forever(speed_sp = 450)
   while color.value(0) < LIFT_ARM_LIMIT:
     pass
   liftm.stop()
 
   grabm.reset()
   grabm.stop_action = "hold"
-  grabm.run_forever(speed_sp=400)
+  grabm.run_forever(speed_sp = 400)
   time.sleep(1)
   pos = int(grabm.count_per_rot * -0.25)
-  grabm.run_to_rel_pos(speed_sp=600, position_sp=pos)
+  grabm.run_to_rel_pos(speed_sp = 600, position_sp=pos)
   
   basem.reset()
   basem.stop_action = "hold"
-  basem.run_forever(speed_sp=450)
+  basem.run_forever(speed_sp = 450)
   while not touch.value(0):
     pass
   basem.stop() 
   pos = int(basem.count_per_rot * (0.25 + EXTRA) / RATIO)
   basem.position = pos
-  basem.run_to_abs_pos(speed_sp=450, position_sp=0)
+  basem.run_to_abs_pos(speed_sp = 450, position_sp = 0)
   while "holding" not in basem.state:
     pass
 
