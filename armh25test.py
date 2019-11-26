@@ -2,8 +2,10 @@
 
 from ev3dev2.sound import Sound
 from ev3dev2.button import Button
-from ev3dev2.motor import MediumMotor, LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C 
+from ev3dev2.motor import MediumMotor, LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
+from ev3dev2.sensor import INPUT_1, INPUT_2, INPUT_3, INPUT_4 
 from ev3dev2.sensor.lego import TouchSensor, ColorSensor
+
 import time
 
 BASE_GEAR_RATIO = 12.0 / 36.0  
@@ -27,8 +29,8 @@ def init():
   lift_motor = LargeMotor(OUTPUT_B)
   base_motor = LargeMotor(OUTPUT_C)
 
-  base_limit_sensor = TouchSensor()
-  lift_limit_sensor = ColorSensor()
+  base_limit_sensor = TouchSensor(INPUT_1)
+  lift_limit_sensor = ColorSensor(INPUT_3)
 
   lift_limit_sensor.mode = "COL-REFLECT"
   lift_motor.reset()
