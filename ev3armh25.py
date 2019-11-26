@@ -34,7 +34,6 @@ def init():
   lift_motor.reset()
   lift_motor.stop_action = "hold"
   lift_motor.polarity = "inversed"
-  lift_motor.speed_regulation_enabled = "on"
   lift_motor.run_forever(speed_sp=450)
   while lift_limit_sensor.value(0) < LIFT_ARM_LIMIT:
     pass
