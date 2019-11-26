@@ -41,7 +41,6 @@ def init():
 
   grab_motor.reset()
   grab_motor.stop_action = "hold"
-  grab_motor.speed_regulation_enabled = "on"
   grab_motor.run_forever(speed_sp=400)
   time.sleep(1)
   pos = int(grab_motor.count_per_rot * -0.25)  # 90 degrees
@@ -49,7 +48,6 @@ def init():
   
   base_motor.reset()
   base_motor.stop_action = "hold"
-  base_motor.speed_regulation_enabled = "on"
   base_motor.run_forever(speed_sp=450)
   while not base_limit_sensor.value(0):
     pass
