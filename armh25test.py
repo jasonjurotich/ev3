@@ -7,9 +7,9 @@ from ev3dev2.sensor import INPUT_1, INPUT_2, INPUT_3, INPUT_4
 from ev3dev2.sensor.lego import TouchSensor, ColorSensor
 import time
 
-BASE_GEAR_RATIO = 12.0 / 36.0  
-LIFT_ARM_LIMIT = 25 
-BASE_EXTRA = 0.03
+RATIO = 12.0 / 36.0  
+LIMIT = 25 
+EXTRA = 0.03
 
 button = Button()
 sound = Sound()
@@ -44,7 +44,7 @@ def init():
   while not touch.value(0):
     pass
   basem.stop() 
-  pos = int(basem.count_per_rot * (0.25 + BASE_EXTRA) / BASE_GEAR_RATIO)
+  pos = int(basem.count_per_rot * (0.25 + EXTRA) / RATIO)
   basem.position = pos
   basem.run_to_abs_pos(speed_sp=450, position_sp=0)
   while "holding" not in basem.state:
@@ -54,7 +54,7 @@ def init():
 
 
 def move(direction):
-  pos = int(basem.count_per_rot * (0.25 + BASE_EXTRA) / BASE_GEAR_RATIO)
+  pos = int(basem.count_per_rot * (0.25 + EXTRA) / RATIO)
   base_motor.run_to_abs_pos(position_sp = direction * pos)
   while "holding" not in basem.state:
     pass
@@ -69,7 +69,7 @@ def move(direction):
   grabm.stop()
 
   liftm.run_forever(speed_sp = 500)
-  while color.value(0) < LIFT_ARM_LIMIT:
+  while color.value(0) < LIMIT:
     pass
   liftm.stop()
 
@@ -88,7 +88,7 @@ def move(direction):
     pass
 
   liftm.run_forever(speed_sp = 500)
-  while color.value(0) < LIFT_ARM_LIMIT:
+  while color.value(0) < LIMIT:
     pass
   liftm.stop()
 
