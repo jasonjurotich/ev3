@@ -55,7 +55,7 @@ def init():
 
 def move(direction):
   pos = int(basem.count_per_rot * (0.25 + EXTRA) / RATIO)
-  base_motor.run_to_abs_pos(position_sp = direction * pos)
+  basem.run_to_abs_pos(position_sp = direction * pos)
   while "holding" not in basem.state:
     pass
 
