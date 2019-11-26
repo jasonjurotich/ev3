@@ -32,7 +32,7 @@ def init():
 
   lift_limit_sensor.mode = "COL-REFLECT"
   lift_motor.reset()
-  lift_motor.stop_command = "hold"
+  lift_motor.stop_action = "hold"
   lift_motor.polarity = "inversed"
   lift_motor.speed_regulation_enabled = "on"
   lift_motor.run_forever(speed_sp=450)
@@ -41,7 +41,7 @@ def init():
   lift_motor.stop()
 
   grab_motor.reset()
-  grab_motor.stop_command = "hold"
+  grab_motor.stop_action = "hold"
   grab_motor.speed_regulation_enabled = "on"
   grab_motor.run_forever(speed_sp=400)
   time.sleep(1)
@@ -49,7 +49,7 @@ def init():
   grab_motor.run_to_rel_pos(speed_sp=600, position_sp=pos)
   
   base_motor.reset()
-  base_motor.stop_command = "hold"
+  base_motor.stop_action = "hold"
   base_motor.speed_regulation_enabled = "on"
   base_motor.run_forever(speed_sp=450)
   while not base_limit_sensor.value(0):
