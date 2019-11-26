@@ -13,95 +13,91 @@ BASE_EXTRA = 0.03
 
 button = Button()
 sound = Sound()
-grab_motor = MediumMotor(OUTPUT_A)
-lift_motor = LargeMotor(OUTPUT_B)
-base_motor = LargeMotor(OUTPUT_C)
+grabm = MediumMotor(OUTPUT_A)
+liftm = LargeMotor(OUTPUT_B)
+basem = LargeMotor(OUTPUT_C)
 touch = TouchSensor(INPUT_1)
 color = ColorSensor(INPUT_3)
 
 
 def init():
   color.mode = "COL-REFLECT"
-  lift_motor.reset()
-  lift_motor.stop_action = "hold"
-  lift_motor.polarity = "inversed"
-  lift_motor.run_forever(speed_sp=450)
+  
+  liftm.reset()
+  liftm.stop_action = "hold"
+  liftm.polarity = "inversed"
+  liftm.run_forever(speed_sp=450)
   while color.value(0) < LIFT_ARM_LIMIT:
     pass
-  lift_motor.stop()
+  liftm.stop()
 
-  grab_motor.reset()
-  grab_motor.stop_action = "hold"
-  grab_motor.run_forever(speed_sp=400)
+  grabm.reset()
+  grabm.stop_action = "hold"
+  grabm.run_forever(speed_sp=400)
   time.sleep(1)
-  pos = int(grab_motor.count_per_rot * -0.25)  # 90 degrees
-  grab_motor.run_to_rel_pos(speed_sp=600, position_sp=pos)
+  pos = int(grabm.count_per_rot * -0.25)
+  grabm.run_to_rel_pos(speed_sp=600, position_sp=pos)
   
-  base_motor.reset()
-  base_motor.stop_action = "hold"
-  base_motor.run_forever(speed_sp=450)
+  basem.reset()
+  basem.stop_action = "hold"
+  basem.run_forever(speed_sp=450)
   while not touch.value(0):
     pass
-  base_motor.stop()
-  pos = int(base_motor.count_per_rot * (0.25 + BASE_EXTRA) / BASE_GEAR_RATIO)
-  base_motor.position = pos
-  base_motor.run_to_abs_pos(speed_sp=450, position_sp=0)
-  while "holding" not in base_motor.state:
+  basem.stop() 
+  pos = int(basem.count_per_rot * (0.25 + BASE_EXTRA) / BASE_GEAR_RATIO)
+  basem.position = pos
+  basem.run_to_abs_pos(speed_sp=450, position_sp=0)
+  while "holding" not in basem.state:
     pass
 
   sound.speak("Ready!")
 
 
 def move(direction):
-  pos = int(base_motor.count_per_rot * (0.25 + BASE_EXTRA) / BASE_GEAR_RATIO)
-  base_motor.run_to_abs_pos(position_sp=direction * pos)
-  while "holding" not in base_motor.state:
+  pos = int(basem.count_per_rot * (0.25 + BASE_EXTRA) / BASE_GEAR_RATIO)
+  base_motor.run_to_abs_pos(position_sp = direction * pos)
+  while "holding" not in basem.state:
     pass
 
-  pos = int(lift_motor.count_per_rot * 280.0 / 360.0)
-  lift_motor.run_to_rel_pos(speed_sp=180, position_sp=-pos)
-  while "holding" not in lift_motor.state:
+  pos = int(liftm.count_per_rot * 280.0 / 360.0)
+  liftm.run_to_rel_pos(speed_sp = 180, position_sp = -pos)
+  while "holding" not in liftm.state:
     pass
 
-  grab_motor.run_forever(speed_sp=360)
+  grabm.run_forever(speed_sp = 360)
   time.sleep(1)
-  grab_motor.stop()
+  grabm.stop()
 
-  lift_motor.run_forever(speed_sp=500)
+  liftm.run_forever(speed_sp = 500)
   while color.value(0) < LIFT_ARM_LIMIT:
     pass
-  lift_motor.stop()
+  liftm.stop()
 
-  base_motor.run_to_abs_pos(position_sp=0)
-  while "holding" not in base_motor.state:
+  basem.run_to_abs_pos(position_sp = 0)
+  while "holding" not in basem.state:
     pass
 
-  pos = int(lift_motor.count_per_rot * 280.0 / 360.0)
-  lift_motor.run_to_rel_pos(speed_sp=180, position_sp=-pos)
-  while "holding" not in lift_motor.state:
+  pos = int(liftm.count_per_rot * 280.0 / 360.0)
+  liftm.run_to_rel_pos(speed_sp = 180, position_sp=-pos)
+  while "holding" not in liftm.state:
     pass
 
-  pos = int(grab_motor.count_per_rot * 0.25)
-  grab_motor.run_to_rel_pos(speed_sp=360, position_sp=-pos)
-  while "holding" not in grab_motor.state:
+  pos = int(grabm.count_per_rot * 0.25)
+  grabm.run_to_rel_pos(speed_sp = 360, position_sp = -pos)
+  while "holding" not in grabm.state:
     pass
 
-  lift_motor.run_forever(speed_sp=500)
+  liftm.run_forever(speed_sp = 500)
   while color.value(0) < LIFT_ARM_LIMIT:
     pass
-  lift_motor.stop()
+  liftm.stop()
 
 
 def stop():
-  global lift_limit_sensor
-  global grab_motor
-  global lift_motor
-  global base_motor
-
   color.mode = "COL-AMBIENT"
-  grab_motor.reset()
-  lift_motor.reset()
-  base_motor.reset()
+  grabm.reset()
+  liftm.reset()
+  basem.reset()
 
 
 if __name__ == "__main__":
