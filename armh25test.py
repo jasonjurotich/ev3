@@ -27,7 +27,7 @@ def init():
   liftm.stop_action = "hold"
   liftm.polarity = "inversed"
   liftm.run_forever(speed_sp = 450)
-  while color.value(0) < LIFT_ARM_LIMIT:
+  while color.value(0) < LIMIT:
     pass
   liftm.stop()
 
